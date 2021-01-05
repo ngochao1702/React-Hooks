@@ -1,65 +1,59 @@
-import React, {Component} from 'react'
-import Api from './Api'
-import './App.css'
-import Form from './Form'
-import Table from './Table'
+import React, {useState} from 'react';
+import ChangeToMoney from './components/ChangeMoney/index';
+import TodoList from './components/TodoList/index';
+import TodoForm from './components/TodoForm/index';
 
-class App extends Component {
+
+
+App.propTypes = {
   
-  state = {
-    characters: [
-      {
-        name: 'Charlie',
-        job: 'Janitor',
-      },
-      {
-        name: 'Mac',
-        job: 'Bouncer',
-      },
-      {
-        name: 'Dee',
-        job: 'Aspring actress',
-      },
-      {
-        name: 'Dennis',
-        job: 'Bartender',
-      },
-    ],
-    
+};
+
+function App() {
+  const [ todoList, setTodoList ] = useState([
+    { id: 1, title: 'I love Easy Frontend! 😍 ' },
+    { id: 2, title: 'We love Easy Frontend! 🥰 ' },
+    { id: 3, title: 'They love Easy Frontend! 🚀 ' },
+   ]
+   );
+
+  function handleTodoClick(todo) {
+    const index = todoList.findIndex(x => x.id = todo.id);
+    if (index < 0) return;
+
+    const newTodoList = [...todoList];
+    newTodoList.splice(index, 1);
+    setTodoList(newTodoList);
   }
 
-  removeCharacter = (index) => {
-    const { characters } = this.state
-    
-    this.setState({
-      characters: characters.filter((character, i) => {
-        return i !== index
-      }),
-    })
+  function handleTodoFormSubmit(formValues) {
+    console.log(formValues);
+
+    // add todo list
+    const newTodo = {
+      id: todoList.length +1,
+      ...formValues,
+
+    };
+
+    const newTodoList = [...todoList];
+    newTodoList.push(newTodo);
+    setTodoList(newTodoList);
+
   }
 
-  handleSubmit = (character) => {
-    this.setState({characters: [...this.state.characters, character]})
-  }
-  
-  render() {
+  return (
+    <div className="App">
+      
+      
+      <h1>React Hooks - TodoList</h1>
 
-    const { characters } = this.state
+      <TodoList todos={ todoList } onTodoClick={ handleTodoClick } />
 
-    return (
-      <div className="container">
-        <Table 
-            characterData={ characters } 
-            removeCharacter={ this.removeCharacter }
-         />
-        <Form 
-            handleSubmit={ this.handleSubmit }
-        />
-        <Api />
-      </div>
+      <TodoForm  onSubmit={ handleTodoFormSubmit } />
+    </div>
 
-    );
-  }
+  );
 }
 
 export default App;
