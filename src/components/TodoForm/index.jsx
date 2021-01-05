@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 TodoForm.propTypes = {
   onSubmit: PropTypes.func,
@@ -7,11 +7,11 @@ TodoForm.propTypes = {
 
 TodoForm.defaultProps = {
   onSubmit: null,
-}
+};
 
 function TodoForm(props) {
   const { onSubmit } = props;
-  const [ value, setValue ] = useState('');
+  const [value, setValue] = useState("");
 
   function handleOnChange(event) {
     console.log(event.target.value);
@@ -29,19 +29,18 @@ function TodoForm(props) {
     onSubmit(formValues);
 
     // reset form
-    setValue('');
+    setValue("");
   }
 
   return (
     <div className="container mt-5">
-      <form className="form-group" onSubmit={ handleSubmit }>
-        <input 
-          type="text" 
+      <form className="form-group" onSubmit={handleSubmit}>
+        <input
+          type="text"
           value={value}
-          onChange={ handleOnChange }
+          onChange={handleOnChange}
           name="name"
-
-          />
+        />
       </form>
     </div>
   );
