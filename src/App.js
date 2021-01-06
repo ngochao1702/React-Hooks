@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
-import queryString from 'query-string'
+import queryString from 'query-string';
+import axios from 'axios';
 
 
 import ChangeToMoney from "./components/ChangeMoney/index";
 import TodoList from "./components/TodoList/index";
 import TodoForm from "./components/TodoForm/index";
 import PostList from "./components/PostList";
-import Pagination from "./components/Paginantion";
+import Pagination from "./components/Pagination";
+import PostFiltersForm from "./components/PostFiltersForm";
+import GetApi from './components/GetApi'
+import Clock from './components/Clock'
+import Game from './components/Caro'
 
 App.propTypes = {};
 
@@ -80,9 +85,33 @@ function App() {
     })
   }
 
+  function handleSearchTerm(event) {
+    console.log(event);
+    setFilters({
+      ...filters,
+      _page: 1,
+      title_like: event.searchTerm,
+    });
+  }
+
+  const [ showClock, setShowClock ] = useState(true);
+
   return (
     <div className="App">
-      <h1>React Hooks - TodoList</h1>
+
+
+      <Game />
+
+
+      {/* end reacthooks */}
+
+      {/* <h1>React Hooks - TodoList</h1> */}
+      {/* <GetApi /> */}
+      {/* { showClock && <Clock /> }
+      <button
+        onClick={ () => setShowClock(false) }
+      >Hide Clock</button> */}
+      {/* <PostFiltersForm onSubmit={ handleSearchTerm } />
       <PostList posts={postList} />
 
       <Pagination 
@@ -90,7 +119,7 @@ function App() {
         onChangePage={ handlePageChange }
 
       
-       />
+       /> */}
 
       {/* <TodoList todos={ todoList } onTodoClick={ handleTodoClick } />
 
