@@ -41,9 +41,10 @@ function PostFiltersForm(props) {
 
   return (
     <div>
-     
+      <h3 className="text-info"> Search  </h3>
       <form>
         <input 
+            className="form-control w-50"
             type="text" 
             value={ searchTerm }
             onChange={ handleSearchTermChange }

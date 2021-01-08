@@ -33,14 +33,20 @@ function TodoForm(props) {
   }
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 border border-warning w-50 text-left float-left">
+      <h3 className="text-primary">add Hobbit</h3>
       <form className="form-group" onSubmit={handleSubmit}>
         <input
+          className="form-control w-50 d-inline"
           type="text"
           value={value}
           onChange={handleOnChange}
           name="name"
         />
+        <button 
+          type="submit"
+          className="btn btn-success ml-2"
+          >Thêm</button>
       </form>
     </div>
   );

@@ -1,35 +1,39 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import axios from 'axios'
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import axios from "axios";
 
 GetApi.propTypes = {
-  data: PropTypes.object.isRequired,
+  list: PropTypes.array,
 };
-GetApi.defaultProps ={ 
-  data: null,
-}
+GetApi.defaultProps = {
+  list: null,
+};
 
 function GetApi(props) {
-  
-  const { data } = props;
-  
-  axios.get('https://gist.githubusercontent.com/ngochao1702/70bca845200a1be3bbefe97c86b62f72/raw/b75c65fe230b47102d148a8b387b4833fc4be8b3/gistfile1.txt')
-  .then(function (response) {
-    // handle success
-    console.log(response);
-  })
-  .catch(function (error) {
-    // handle error
-    console.log(error);
-  })
-  .then(function () {
-    // always executed
-  });
+  const { list } = props;
+
+  // useEffect(async () => {
+  //   axios
+  //     .get(
+  //       `https://gist.githubusercontent.com/ngochao1702/2c741806070995e03c86f9cfc4a98da5/raw/505c21e4c83eb97d40842b4d23af99acd7f27d02/gistfile1.txt`
+  //     )
+  //     .then((res) => {
+  //       const list = res.list;
+  //       console.log(list)
+  //       setBook(list);
+  //     })
+  //     .catch((error) => console.log(error));
+  // }, []);
 
   return (
-    <div>
-      
-    </div>
+    <ul>
+      {list.map((item) => (
+        <li key={item.id}>
+          <p>{item.name}</p>
+        </li>
+      ))}
+    </ul>
+
   );
 }
 

@@ -25,34 +25,49 @@ function App() {
   const [ pagination, setPagination ] = useState({
     _page: 1,
     _limit: 10,
-    _totalRows: 50,
+    _totalRows: 1,
   });
 
   const [ filters, setFilters ] = useState({
-    _page: 10,
+    _page: 1,
     _limit: 5,
   });
+ const [books, setBooks] = useState([]);
 
-  const [postList, setPostList] = useState([]);
   useEffect(() => {
-    async function fetchPostList() {
-      try {
-        const paramString = queryString.stringify(filters);
-        const requestUrl =
-          `http://js-post-api.herokuapp.com/api/posts?${paramString}`;
-        const response = await fetch(requestUrl);
-        const responseJSON = await response.json();
-        console.log({ responseJSON });
-        const { data, pagination } = responseJSON;
-        setPostList(data);
-        setPagination(pagination);
-      } catch (error) {
-        console.log("failed to fetch post list:", error.message);
-      }
-    }
+    const fetchData = async () => {
+      const result = await axios(
+        "https://gist.githubusercontent.com/ngochao1702/2c741806070995e03c86f9cfc4a98da5/raw/505c21e4c83eb97d40842b4d23af99acd7f27d02/gistfile1.txt"
+      );
+      // const table = result.data
+      // console.log(table)
+      setBooks(result.data);
+    };
+    fetchData();
+  }, []);
+ 
+  
 
-    fetchPostList();
-  }, [filters]);
+  // const [postList, setPostList] = useState([]);
+  // useEffect(() => {
+  //   async function fetchPostList() {
+  //     try {
+  //       const paramString = queryString.stringify(filters);
+  //       const requestUrl =
+  //         `http://js-post-api.herokuapp.com/api/posts?${paramString}`;
+  //       const response = await fetch(requestUrl);
+  //       const responseJSON = await response.json();
+  //       console.log({ responseJSON });
+  //       const { data, pagination } = responseJSON;
+  //       setPostList(data);
+  //       setPagination(pagination);
+  //     } catch (error) {
+  //       console.log("failed to fetch post list:", error.message);
+  //     }
+  //   }
+
+  //   fetchPostList();
+  // }, [filters]);
 
   function handleTodoClick(todo) {
     const index = todoList.findIndex((x) => (x.id = todo.id));
@@ -97,16 +112,18 @@ function App() {
   const [ showClock, setShowClock ] = useState(true);
 
   return (
-    <div className="App">
+    <div className="App border border-success p-4 w-75">
 
 
-      <Game />
+      {/* <Game /> */}
 
 
-      {/* end reacthooks */}
+      {/* end reactHooks */}
 
-      {/* <h1>React Hooks - TodoList</h1> */}
-      {/* <GetApi /> */}
+      <h1
+        className="border border-info text-info w-50 text-center"
+      >React Hooks - TodoList</h1>
+      <GetApi list ={ books }/>
       {/* { showClock && <Clock /> }
       <button
         onClick={ () => setShowClock(false) }

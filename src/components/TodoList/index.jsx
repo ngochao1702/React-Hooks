@@ -21,16 +21,21 @@ function TodoList(props) {
   }
 
   return (
-    <ul className="todo-list">
-      {todos.map(todo => (
-        <li
-          key={todo.id}
-          onClick={() => handleClick(todo)}
-        >
-          {todo.title}
-        </li>
-      ))}
-    </ul>
+    <div className="border border-info text-center">
+      <h1 className="bg-primary">List Hobbit</h1>
+      <ul className="todo-list list-group">
+        {todos.map(todo => (
+          <li
+            className="list-group-item"
+            key={todo.id}
+            onClick={() => handleClick(todo)}
+          >
+            {todo.title}
+          </li>
+        ))}
+      </ul>
+    </div>
+    
   );
 }
 
